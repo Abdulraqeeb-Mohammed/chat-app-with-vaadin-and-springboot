@@ -8,3 +8,19 @@
     overflow-y: scroll;
     width: 100%;
 }
+"p-red", "p-black", "p-yellow", "p-pink", "p-green"
+.p-red {
+    color : red;
+}
+.p-black {
+    color : black;
+}
+.p-yellow {
+    color : yellow;
+}
+.p-pink {
+    color : pink;
+}
+.p-green {
+    color : green;
+}

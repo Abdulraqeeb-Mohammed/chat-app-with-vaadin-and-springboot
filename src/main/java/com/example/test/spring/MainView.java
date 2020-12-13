@@ -17,6 +17,8 @@ import com.vaadin.flow.server.PWA;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.UnicastProcessor;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 @Route("")
 @StyleSheet("styles/styles.css")
 @Push
@@ -74,8 +76,18 @@ public class MainView extends VerticalLayout {
       add(btnClearChat);
     }
 
+    String [] chatColors = {"p-red", "p-black", "p-yellow", "p-pink", "p-green"};
+
     messages.subscribe(m -> {
-      getUI().ifPresent(ui -> ui.access(() -> messageList.add(new Paragraph(m.getFrom() + ": " + m.getMessage()))));
+      getUI().ifPresent(ui -> ui.access(() ->
+              {
+                Paragraph paragraph = new Paragraph(m.getFrom() + ": " + m.getMessage());
+                int randomNum = ThreadLocalRandom.current().nextInt(0, 5);
+                paragraph.addClassName(chatColors[randomNum]);
+                messageList.add(paragraph);
+              }
+
+      ));
     });
 
 
